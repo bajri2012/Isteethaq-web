@@ -1,0 +1,19 @@
+node_modules
+dist
+dist-ssr
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+.vite
+.vercel
+.idea
+.vscode
+*.tsbuildinfo
+
+# ملفات داخلية
+plan.md
+package.json.reference
+MIGRATION-TO-NEW-REPO.md
+*.sql

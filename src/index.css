@@ -1,0 +1,1033 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === CSS Variables for Safe Areas (iOS/Android) === */
+html {
+  --safe-area-inset-top: env(safe-area-inset-top, 0);
+  --safe-area-inset-right: env(safe-area-inset-right, 0);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0);
+  --safe-area-inset-left: env(safe-area-inset-left, 0);
+}
+
+@layer base {
+  :root {
+    /* ════════════════════════════════════════════════════
+       Brand Palette — Midnight Slate + Steel Blue + Gold
+       ════════════════════════════════════════════════════
+       Midnight Slate  #1E2B38  →  HSL 210 30% 17%  (navbar/sidebar)
+       Steel Blue      #3A6186  →  HSL 209 40% 38%  (primary/buttons)
+       Antique Gold    #B8A06A  →  HSL 41  36% 57%  (accent/highlights)
+       Warm Gold       #D4B97E  →  HSL 41  50% 66%  (hover/alerts)
+       Stone Light     #EDF0F3  →  HSL 210 20% 94%  (page background)
+       Pale Steel      #E4ECF3  →  HSL 209 39% 92%  (blue badge bg)
+       Gold Tint       #F5EDD4  →  HSL 45  63% 90%  (gold badge bg)
+       Off-white       #FAFAF9  →  HSL 60  10% 98%  (card bg)
+    */
+
+    /* Named brand tokens (for direct use) */
+    --midnight-slate:  210 30% 17%;
+    --steel-blue:      209 40% 38%;
+    --antique-gold:    41  36% 57%;
+    --warm-gold:       41  50% 66%;
+    --stone-light:     210 20% 94%;
+    --pale-steel:      209 39% 92%;
+    --gold-tint:       45  63% 90%;
+    --off-white:       60  10% 98%;
+
+    /* === Primary = Steel Blue #3A6186 === */
+    --primary: 209 40% 38%;
+    --primary-foreground: 0 0% 100%;
+    --primary-container: 209 39% 92%;          /* Pale Steel */
+    --primary-container-foreground: 210 30% 17%;
+
+    /* === Secondary = mid Steel Blue === */
+    --secondary: 209 32% 52%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-container: 209 39% 92%;        /* Pale Steel */
+    --secondary-container-foreground: 210 30% 17%;
+
+    /* === Accent = Antique Gold #B8A06A === */
+    --accent: 41 36% 57%;
+    --accent-foreground: 210 30% 17%;          /* Midnight Slate on gold */
+    --gold: 41 36% 57%;                        /* Antique Gold */
+    --gold-light: 41 50% 66%;                  /* Warm Gold */
+    --accent-container: 45 63% 90%;            /* Gold Tint */
+    --accent-container-foreground: 41 36% 25%;
+
+    /* === Surfaces === */
+    --background: 210 20% 94%;                 /* Stone Light #EDF0F3 */
+    --foreground: 210 30% 17%;                 /* Midnight Slate */
+    --surface: 60 10% 98%;                     /* Off-white #FAFAF9 */
+    --surface-variant: 209 25% 89%;
+    --card: 60 10% 98%;                        /* Off-white #FAFAF9 */
+    --card-foreground: 210 30% 17%;
+    --popover: 60 10% 98%;
+    --popover-foreground: 210 30% 17%;
+
+    /* === Muted === */
+    --secondary-alt: 210 18% 95%;
+    --secondary-alt-foreground: 210 30% 17%;
+    --muted: 209 39% 92%;                      /* Pale Steel */
+    --muted-foreground: 210 18% 46%;
+
+    /* === Status Colors === */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 160 84% 30%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 10%;
+    --info: 209 45% 45%;                       /* Steel Blue tone */
+    --info-foreground: 0 0% 100%;
+
+    /* === Borders & Inputs === */
+    --border: 209 22% 86%;
+    --input: 209 22% 86%;
+    --ring: 209 40% 38%;                       /* Steel Blue */
+    --radius: 0.75rem;
+
+    /* === Outline Colors === */
+    --outline: 210 18% 60%;
+    --outline-variant: 210 18% 80%;
+
+    /* === Neumorphic Shadows === */
+    --neu-shadow-light: hsl(0 0% 100% / 0.85);
+    --neu-shadow-dark: hsl(209 25% 80% / 0.55);
+    --neu-shadow-light-sm: hsl(0 0% 100% / 0.75);
+    --neu-shadow-dark-sm: hsl(209 25% 82% / 0.45);
+
+    /* === Elevations === */
+    --elevation-0: none;
+    --elevation-1: 0 1px 3px 0 hsl(210 30% 17% / 0.05), 0 1px 2px -1px hsl(210 30% 17% / 0.05);
+    --elevation-2: 0 2px 6px 0 hsl(210 30% 17% / 0.08), 0 2px 4px -1px hsl(210 30% 17% / 0.08);
+    --elevation-3: 0 4px 12px 0 hsl(210 30% 17% / 0.12), 0 4px 6px -1px hsl(210 30% 17% / 0.12);
+    --elevation-4: 0 8px 24px 0 hsl(210 30% 17% / 0.16), 0 8px 8px -1px hsl(210 30% 17% / 0.16);
+    --elevation-5: 0 16px 40px 0 hsl(210 30% 17% / 0.2), 0 16px 12px -1px hsl(210 30% 17% / 0.2);
+
+    /* === Sidebar = Light Steel (فاتح) === */
+    --sidebar-background: 209 28% 96%;         /* Pale Steel light tint */
+    --sidebar-foreground: 210 30% 20%;         /* Midnight Slate text */
+    --sidebar-primary: 209 40% 38%;            /* Steel Blue active */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 209 39% 90%;             /* Pale Steel hover */
+    --sidebar-accent-foreground: 210 30% 20%;
+    --sidebar-border: 209 22% 88%;
+    --sidebar-ring: 209 40% 38%;
+
+    /* === Gradients === */
+    --gradient-primary: linear-gradient(135deg, hsl(210 30% 17%), hsl(209 40% 38%));
+    --gradient-sidebar: linear-gradient(180deg, hsl(209 32% 94%), hsl(209 28% 96%));
+    --gradient-gold: linear-gradient(135deg, hsl(41 36% 57%), hsl(41 50% 66%));
+    --shadow-elevated: 0 8px 30px -6px hsl(210 30% 17% / 0.12), 0 2px 8px -2px hsl(210 30% 17% / 0.08);
+    --shadow-card: 0 1px 3px 0 hsl(210 30% 17% / 0.05), 0 1px 2px -1px hsl(210 30% 17% / 0.05);
+    --shadow-glass: 0 8px 32px -8px hsl(210 30% 17% / 0.1);
+  }
+
+  .dark {
+    /* === Dark Mode — Deep Midnight Slate family === */
+    --primary: 209 45% 58%;
+    --primary-foreground: 210 30% 10%;
+    --primary-container: 209 38% 22%;
+    --primary-container-foreground: 209 45% 85%;
+
+    --secondary: 209 32% 62%;
+    --secondary-foreground: 210 30% 10%;
+    --secondary-container: 209 28% 20%;
+    --secondary-container-foreground: 209 35% 85%;
+
+    --accent: 41 42% 62%;
+    --accent-foreground: 210 30% 10%;
+    --gold: 41 42% 62%;
+    --gold-light: 41 52% 72%;
+    --accent-container: 41 30% 20%;
+    --accent-container-foreground: 41 50% 85%;
+
+    /* === Dark Surfaces === */
+    --background: 210 30% 10%;
+    --foreground: 210 15% 90%;
+    --surface: 210 28% 13%;
+    --surface-variant: 210 25% 18%;
+    --card: 210 28% 13%;
+    --card-foreground: 210 15% 90%;
+    --popover: 210 28% 15%;
+    --popover-foreground: 210 15% 90%;
+
+    --secondary-alt: 210 25% 17%;
+    --secondary-alt-foreground: 210 15% 90%;
+    --muted: 210 25% 18%;
+    --muted-foreground: 210 15% 56%;
+
+    --destructive: 0 62% 36%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 160 70% 38%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 80% 52%;
+    --warning-foreground: 0 0% 10%;
+    --info: 209 45% 58%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 210 25% 22%;
+    --input: 210 25% 22%;
+    --ring: 209 45% 58%;
+
+    /* === Dark Neumorphic Shadows === */
+    --neu-shadow-light: hsl(210 25% 20% / 0.5);
+    --neu-shadow-dark: hsl(210 35% 6% / 0.75);
+    --neu-shadow-light-sm: hsl(210 25% 20% / 0.4);
+    --neu-shadow-dark-sm: hsl(210 35% 6% / 0.6);
+
+    /* === Dark Sidebar — deeper Midnight Slate === */
+    --sidebar-background: 210 35% 8%;
+    --sidebar-foreground: 210 15% 85%;
+    --sidebar-primary: 41 42% 62%;             /* Warm Gold */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 30% 14%;
+    --sidebar-accent-foreground: 210 15% 85%;
+    --sidebar-border: 210 30% 14%;
+    --sidebar-ring: 41 42% 62%;
+
+    --outline: 210 12% 65%;
+    --outline-variant: 210 12% 30%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    /* === Font Optimization === */
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground font-cairo antialiased;
+    /* === Ensure full viewport on mobile === */
+    min-height: 100dvh;
+    min-height: 100vh;
+    /* NOTE: do NOT set position:fixed or overflow:hidden here — that breaks
+       window scrolling on the public website and any page that relies on
+       natural document flow. The dashboard shell manages its own fixed-
+       height scroll container in DashboardLayout. */
+  }
+
+  /* === RTL Support === */
+  [dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+  }
+
+  [dir="ltr"] {
+    direction: ltr;
+    text-align: left;
+  }
+
+  /* Flip icons that are inherently directional (arrows, chevrons used as nav indicators) */
+  [dir="rtl"] .rtl-flip {
+    transform: scaleX(-1);
+  }
+
+  /* Ensure prose content respects RTL */
+  [dir="rtl"] .prose {
+    text-align: right;
+  }
+
+  /* Fix number-only fields that should remain LTR (phone, URLs, amounts) */
+  [dir="rtl"] input[type="number"],
+  [dir="rtl"] input[type="tel"],
+  [dir="rtl"] input[type="url"],
+  [dir="rtl"] input[type="email"] {
+    direction: ltr;
+    text-align: right;
+  }
+
+  /* Breadcrumb separators in RTL */
+  [dir="rtl"] .breadcrumb-separator {
+    transform: scaleX(-1);
+  }
+
+  /* Fix placeholder alignment for RTL inputs */
+  [dir="rtl"] input::placeholder,
+  [dir="rtl"] textarea::placeholder {
+    text-align: right;
+  }
+
+  /* Ensure select dropdowns align properly in RTL */
+  [dir="rtl"] select {
+    text-align: right;
+  }
+
+  /* === Scrollbar Styling === */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.2);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.35);
+    background-clip: content-box;
+  }
+
+  /* === Focus Styles === */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring/40 ring-offset-2 ring-offset-background;
+  }
+
+  button:focus-visible,
+  [role="button"]:focus-visible {
+    @apply outline-none ring-2 ring-ring/50 ring-offset-1 ring-offset-background;
+  }
+
+  /* === Typography === */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply tracking-tight font-semibold;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  h4 {
+    @apply text-xl;
+  }
+
+  h5 {
+    @apply text-lg;
+  }
+
+  h6 {
+    @apply text-base;
+  }
+
+  /* === Code Styling === */
+  code,
+  pre {
+    @apply font-mono;
+  }
+
+  code {
+    @apply text-sm bg-muted px-1.5 py-0.5 rounded;
+  }
+
+  /* === Link Styling === */
+  a {
+    @apply text-primary hover:text-primary/90 transition-colors duration-200;
+  }
+
+  /* === Selection Styling === */
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+
+  /* === Mobile Viewport Optimization === */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: max(var(--safe-area-inset-left), 0);
+      padding-right: max(var(--safe-area-inset-right), 0);
+      padding-top: max(var(--safe-area-inset-top), 0);
+      padding-bottom: max(var(--safe-area-inset-bottom), 0);
+    }
+  }
+}
+
+@layer utilities {
+  /* === Neumorphic Effects === */
+  .neu-raised {
+    box-shadow:
+      6px 6px 14px 0 var(--neu-shadow-dark),
+      -6px -6px 14px 0 var(--neu-shadow-light);
+  }
+
+  .neu-raised-sm {
+    box-shadow:
+      3px 3px 8px 0 var(--neu-shadow-dark-sm),
+      -3px -3px 8px 0 var(--neu-shadow-light-sm);
+  }
+
+  .neu-raised-lg {
+    box-shadow:
+      8px 8px 20px 0 var(--neu-shadow-dark),
+      -8px -8px 20px 0 var(--neu-shadow-light);
+  }
+
+  .neu-inset {
+    box-shadow:
+      inset 3px 3px 8px 0 var(--neu-shadow-dark-sm),
+      inset -3px -3px 8px 0 var(--neu-shadow-light-sm);
+  }
+
+  .neu-inset-sm {
+    box-shadow:
+      inset 2px 2px 5px 0 var(--neu-shadow-dark-sm),
+      inset -2px -2px 5px 0 var(--neu-shadow-light-sm);
+  }
+
+  /* === Material Design Elevations === */
+  .elevation-0 {
+    box-shadow: var(--elevation-0);
+  }
+
+  .elevation-1 {
+    box-shadow: var(--elevation-1);
+  }
+
+  .elevation-2 {
+    box-shadow: var(--elevation-2);
+  }
+
+  .elevation-3 {
+    box-shadow: var(--elevation-3);
+  }
+
+  .elevation-4 {
+    box-shadow: var(--elevation-4);
+  }
+
+  .elevation-5 {
+    box-shadow: var(--elevation-5);
+  }
+
+  /* === Touch Target Size (48dp minimum) === */
+  .touch-target {
+    @apply min-h-12 min-w-12 flex items-center justify-center;
+  }
+
+  /* === Mobile Safe Area === */
+  .safe-area-top {
+    padding-top: var(--safe-area-inset-top, 0);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: var(--safe-area-inset-bottom, 0);
+  }
+
+  .safe-area-left {
+    padding-left: var(--safe-area-inset-left, 0);
+  }
+
+  .safe-area-right {
+    padding-right: var(--safe-area-inset-right, 0);
+  }
+
+  /* === Viewport Height Variants === */
+  .h-dvh {
+    height: 100dvh;
+    height: 100vh;
+  }
+
+  .min-h-dvh {
+    min-height: 100dvh;
+    min-height: 100vh;
+  }
+
+  /* === Fade In Animation === */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  /* === Glass Morphism === */
+  .glass {
+    background: hsl(var(--background) / 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border));
+  }
+
+  .glass-dark {
+    background: hsl(0 0% 0% / 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+  }
+
+  /* === Responsive Text === */
+  .text-xs {
+    @apply text-[0.75rem];
+  }
+
+  .text-sm {
+    @apply text-[0.875rem];
+  }
+
+  .text-base {
+    @apply text-[1rem];
+  }
+
+  .text-lg {
+    @apply text-[1.125rem];
+  }
+
+  .text-xl {
+    @apply text-[1.25rem];
+  }
+
+  .text-2xl {
+    @apply text-[1.5rem];
+  }
+
+  .text-3xl {
+    @apply text-[1.875rem];
+  }
+
+  .text-4xl {
+    @apply text-[2.25rem];
+  }
+
+  /* === Truncate Classes === */
+  .line-clamp-1 {
+    @apply overflow-hidden text-ellipsis whitespace-nowrap;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* === Gradient Text === */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+  }
+
+  .gradient-text-primary {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  /* === Disabled State === */
+  .disabled\:opacity-50:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  /* === Loading Skeleton === */
+  .skeleton {
+    @apply bg-muted animate-pulse rounded;
+  }
+
+  /* === Print Styles === */
+  @media print {
+    .no-print {
+      @apply hidden;
+    }
+
+    body {
+      @apply bg-white text-black;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Bottom-nav safe clearance ───────────────────────────────────────────────
+   Unified rule applied automatically by DashboardLayout to <main>:
+   - Desktop / tablet (≥640px): nav is hidden → only reserve the device
+     safe-area-inset-bottom + aesthetic padding.
+   - Mobile (<640px): nav is visible (fixed) → reserve nav height + safe-area.
+   Placed AFTER @tailwind utilities so it beats Tailwind padding classes.
+   ─────────────────────────────────────────────────────────────────────────── */
+:root {
+  --mobile-nav-height: 72px;
+}
+.pb-nav-safe {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 1.5rem) !important;
+}
+@media (max-width: 639px) {
+  .pb-nav-safe {
+    /* nav height already includes its own safe-area padding (see useNavHeightSync),
+       plus a generous 32px buffer so the last row is never clipped. */
+    padding-bottom: calc(var(--mobile-nav-height) + 32px) !important;
+  }
+}
+/* Scroll-margin variant so anchor scrolls + focus rings clear the nav too */
+@media (max-width: 639px) {
+  .scroll-mb-nav-safe {
+    scroll-margin-bottom: calc(var(--mobile-nav-height) + 32px);
+  }
+}
+/* Margin variant — for full-bleed flex containers where padding-bottom
+   doesn't propagate to h-full descendants (Inbox, AI chat composer). */
+.mb-nav-safe { margin-bottom: 0 !important; }
+@media (max-width: 639px) {
+  .mb-nav-safe {
+    margin-bottom: calc(var(--mobile-nav-height) + 16px) !important;
+  }
+}
+
+@layer utilities {
+  /* === Neumorphic Interactive (raised â†’ pressed on active) === */
+  .neu-btn {
+    box-shadow:
+      4px 4px 10px 0 var(--neu-shadow-dark),
+      -4px -4px 10px 0 var(--neu-shadow-light);
+    transition:
+      box-shadow 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .neu-btn:hover {
+    box-shadow:
+      5px 5px 14px 0 var(--neu-shadow-dark),
+      -5px -5px 14px 0 var(--neu-shadow-light);
+  }
+
+  .neu-btn:active {
+    box-shadow:
+      inset 3px 3px 8px 0 var(--neu-shadow-dark-sm),
+      inset -3px -3px 8px 0 var(--neu-shadow-light-sm);
+    transform: scale(0.98);
+  }
+
+  /* === Card hover with neumorphic lift === */
+  .neu-card-hover {
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .neu-card-hover:hover {
+    box-shadow:
+      8px 8px 20px 0 var(--neu-shadow-dark),
+      -8px -8px 20px 0 var(--neu-shadow-light);
+    transform: translateY(-2px);
+  }
+
+  /* === Legacy gradient & shadow utilities === */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-sidebar {
+    background: var(--gradient-sidebar);
+  }
+
+  .gradient-gold {
+    background: var(--gradient-gold);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-glass {
+    box-shadow: var(--shadow-glass);
+  }
+
+  /* === Glass morphism === */
+  .glass {
+    @apply bg-card/70 backdrop-blur-xl border border-border/50;
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-subtle {
+    @apply bg-card/50 backdrop-blur-md border border-border/30;
+  }
+
+  /* === Card hover lift (legacy) === */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-elevated hover:-translate-y-0.5;
+  }
+
+  /* === Gradient text === */
+  .text-gradient-gold {
+    @apply bg-gradient-to-l from-accent via-gold-light to-accent bg-clip-text text-transparent;
+  }
+
+  /* === Subtle pattern overlay === */
+  .pattern-grid {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* === Smooth section transitions === */
+  .section-fade {
+    @apply animate-fade-in;
+    animation-fill-mode: both;
+  }
+
+  /* === Mobile-friendly touch targets === */
+  @media (max-width: 640px) {
+    .touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+}
+
+/* === Ø£Ù„ÙˆØ§Ù† Ø§Ù„Ù…ÙˆÙ‚Ø¹ Ø§Ù„ØªØ¹Ø±ÙŠÙÙŠ === */
+:root {
+  --ws-navy: 218 55% 12%;
+  --ws-navy-light: 218 45% 20%;
+  --ws-gold: 40 65% 52%;
+  --ws-gold-light: 40 55% 62%;
+  --ws-white: 40 20% 99%;
+  --ws-gray: 40 18% 96%;
+  --ws-text: 218 55% 12%;
+  --ws-text-muted: 218 15% 48%;
+}
+
+/* === Scroll-triggered animations === */
+@keyframes ws-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ws-reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.ws-reveal {
+  animation: ws-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.ws-reveal-scale {
+  animation: ws-reveal-scale 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* === Selection color === */
+::selection {
+  background: hsl(var(--primary) / 0.15);
+  color: hsl(var(--primary));
+}
+
+/* === Smooth page transitions === */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Hide scrollbars (used by horizontally-scrolling tab lists) */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ══════════════════════════════════════════════════════════════════
+   INTERACTION ANIMATIONS
+   Inspired by hover.css · magic.css · animate.css
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── hover.css: Glow & Float ── */
+@keyframes hvr-float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+.btn-float {
+  transition: transform 0.2s ease;
+}
+.btn-float:hover {
+  animation: hvr-float 0.5s ease-out forwards;
+}
+
+.btn-glow {
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+.btn-glow:hover {
+  box-shadow: 0 4px 22px hsl(var(--primary) / 0.38);
+  transform: translateY(-1px);
+}
+.btn-glow:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px hsl(var(--primary) / 0.2);
+}
+
+.btn-glow-gold {
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+.btn-glow-gold:hover {
+  box-shadow: 0 4px 22px hsl(var(--accent) / 0.45);
+  transform: translateY(-1px);
+}
+
+/* hover.css: Shimmer (shine sweep across the button) */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-120%) skewX(-15deg); }
+  100% { transform: translateX(220%)  skewX(-15deg); }
+}
+.btn-shimmer {
+  overflow: hidden;
+  position: relative;
+}
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent  35%,
+    hsl(0 0% 100% / 0.22) 50%,
+    transparent  65%
+  );
+  transform: translateX(-120%) skewX(-15deg);
+}
+.btn-shimmer:hover::after {
+  animation: shimmer-sweep 0.55s ease forwards;
+}
+
+/* ── hover.css: Pulse Ring (for icon buttons / CTAs) ── */
+@keyframes hvr-pulse-ring {
+  0%   { box-shadow: 0 0 0 0   hsl(var(--primary) / 0.45); }
+  70%  { box-shadow: 0 0 0 10px hsl(var(--primary) / 0); }
+  100% { box-shadow: 0 0 0 0   hsl(var(--primary) / 0); }
+}
+.btn-pulse:hover {
+  animation: hvr-pulse-ring 0.7s ease-out;
+}
+
+/* ── Input focus glow ── */
+.input-glow {
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.input-glow:focus,
+.input-glow:focus-within {
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.18);
+  border-color: hsl(var(--primary) / 0.55) !important;
+}
+
+/* ── animate.css: bounceIn (notifications, alerts) ── */
+@keyframes bounce-in {
+  0%   { transform: scale(0.3);  opacity: 0; }
+  50%  { transform: scale(1.06); opacity: 0.9; }
+  70%  { transform: scale(0.92); }
+  100% { transform: scale(1);    opacity: 1; }
+}
+.animate-bounce-in {
+  animation: bounce-in 0.48s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* animate.css: rubberBand (attention-grabber) */
+@keyframes rubber-band {
+  0%   { transform: scale(1); }
+  30%  { transform: scaleX(1.25) scaleY(0.75); }
+  40%  { transform: scaleX(0.75) scaleY(1.25); }
+  60%  { transform: scaleX(1.15) scaleY(0.85); }
+  80%  { transform: scaleX(0.95) scaleY(1.05); }
+  100% { transform: scale(1); }
+}
+.animate-rubber-band {
+  animation: rubber-band 0.6s ease-out both;
+}
+
+/* animate.css: slideInUp */
+@keyframes slide-in-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-in-up {
+  animation: slide-in-up 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* animate.css: slideInDown */
+@keyframes slide-in-down {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-in-down {
+  animation: slide-in-down 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── magic.css: magicIn (task creation / success pop) ── */
+@keyframes magic-in {
+  0%   { opacity: 0; transform: scale(0.5) rotate(-8deg); filter: brightness(1.8) saturate(1.5); }
+  50%  { transform: scale(1.08) rotate(2deg); filter: brightness(1.2); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); filter: brightness(1); }
+}
+.animate-magic-in {
+  animation: magic-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Task completion: pop + glow ── */
+@keyframes task-complete {
+  0%   { transform: scale(0.75); opacity: 0.4; }
+  55%  { transform: scale(1.12); box-shadow: 0 0 16px hsl(var(--success) / 0.5); }
+  75%  { transform: scale(0.96); }
+  100% { transform: scale(1);    opacity: 1; box-shadow: none; }
+}
+.animate-task-complete {
+  animation: task-complete 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ── Critical badge: pulsing ring (overdue / urgent tasks) ── */
+@keyframes critical-ring {
+  0%   { box-shadow: 0 0 0 0    hsl(var(--destructive) / 0.55); }
+  60%  { box-shadow: 0 0 0 8px  hsl(var(--destructive) / 0); }
+  100% { box-shadow: 0 0 0 0    hsl(var(--destructive) / 0); }
+}
+.badge-critical {
+  animation: critical-ring 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Warning pulse (approaching deadline) */
+@keyframes warning-pulse {
+  0%, 100% { box-shadow: 0 0 0 0   hsl(var(--warning) / 0.5); }
+  50%       { box-shadow: 0 0 0 6px hsl(var(--warning) / 0); }
+}
+.badge-warning-pulse {
+  animation: warning-pulse 2s ease-in-out infinite;
+}
+
+/* ── Stagger helper (apply delay via inline style) ── */
+.stagger-item {
+  opacity: 0;
+  animation: slide-in-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.stagger-item:nth-child(1) { animation-delay: 0ms; }
+.stagger-item:nth-child(2) { animation-delay: 60ms; }
+.stagger-item:nth-child(3) { animation-delay: 120ms; }
+.stagger-item:nth-child(4) { animation-delay: 180ms; }
+.stagger-item:nth-child(5) { animation-delay: 240ms; }
+.stagger-item:nth-child(6) { animation-delay: 300ms; }
+.stagger-item:nth-child(n+7) { animation-delay: 350ms; }
+
+/* ================================================================
+   Platform Console â€” Emerald Prestige scoped theme
+   Applied via [data-scope="platform"] so it never leaks to the firm/portal.
+   ================================================================ */
+[data-scope="platform"] {
+  --pf-emerald: 160 78% 22%;
+  --pf-emerald-strong: 160 78% 30%;
+  --pf-emerald-soft: 160 50% 92%;
+  --pf-gold: 42 70% 50%;
+  --pf-gold-soft: 42 80% 88%;
+  --pf-ink: 165 35% 10%;
+  --pf-surface: 160 30% 98%;
+  --pf-surface-2: 160 22% 95%;
+  --pf-border: 160 18% 88%;
+
+  --primary: var(--pf-emerald);
+  --primary-foreground: 0 0% 100%;
+  --accent: var(--pf-gold);
+  --accent-foreground: 165 35% 10%;
+  --ring: var(--pf-emerald);
+
+  --pf-grad-hero: linear-gradient(135deg, hsl(var(--pf-emerald)) 0%, hsl(var(--pf-emerald-strong)) 55%, hsl(var(--pf-gold)) 130%);
+  --pf-grad-card: linear-gradient(180deg, hsl(var(--pf-surface)) 0%, hsl(var(--pf-surface-2)) 100%);
+}
+.dark [data-scope="platform"] {
+  --pf-emerald: 160 70% 42%;
+  --pf-emerald-strong: 160 70% 50%;
+  --pf-emerald-soft: 160 40% 16%;
+  --pf-gold: 42 78% 60%;
+  --pf-gold-soft: 42 35% 18%;
+  --pf-surface: 165 25% 11%;
+  --pf-surface-2: 165 22% 14%;
+  --pf-border: 165 20% 20%;
+  --pf-ink: 160 15% 92%;
+}
+
+@layer utilities {
+  .pf-title {
+    @apply text-2xl md:text-3xl font-bold;
+    background: linear-gradient(120deg, hsl(var(--pf-ink)) 0%, hsl(var(--pf-emerald-strong)) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .pf-accent-bar {
+    @apply inline-block h-8 w-1.5 rounded-full;
+    background: linear-gradient(180deg, hsl(var(--pf-emerald)) 0%, hsl(var(--pf-gold)) 100%);
+  }
+  .pf-hero-gradient { background: var(--pf-grad-hero); }
+  .pf-card {
+    background: var(--pf-grad-card);
+    border: 1px solid hsl(var(--pf-border));
+    box-shadow:
+      0 1px 0 hsl(0 0% 100% / 0.5) inset,
+      0 1px 2px hsl(var(--pf-ink) / 0.04),
+      0 8px 24px -12px hsl(var(--pf-emerald) / 0.18);
+    border-radius: 0.875rem;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .pf-card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 1px 0 hsl(0 0% 100% / 0.6) inset,
+      0 2px 4px hsl(var(--pf-ink) / 0.05),
+      0 18px 36px -16px hsl(var(--pf-emerald) / 0.28);
+  }
+  .pf-chip {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium;
+    background: hsl(var(--pf-emerald-soft));
+    color: hsl(var(--pf-emerald-strong));
+    border: 1px solid hsl(var(--pf-emerald) / 0.18);
+  }
+  .pf-chip-gold {
+    background: hsl(var(--pf-gold-soft));
+    color: hsl(var(--pf-gold) / 1);
+    border-color: hsl(var(--pf-gold) / 0.3);
+  }
+  .pf-nav-active {
+    background: linear-gradient(90deg, hsl(var(--pf-emerald) / 0.14), transparent 90%);
+    color: hsl(var(--pf-emerald-strong));
+    border-inline-start: 3px solid hsl(var(--pf-gold));
+  }
+  .pf-section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--pf-border)) 30%, hsl(var(--pf-border)) 70%, transparent);
+  }
+  @keyframes pf-pulse-soft {
+    0%, 100% { box-shadow: 0 0 0 0 hsl(var(--pf-emerald) / 0.35); }
+    50% { box-shadow: 0 0 0 6px hsl(var(--pf-emerald) / 0); }
+  }
+  .pf-live-dot {
+    @apply inline-block h-2 w-2 rounded-full;
+    background: hsl(var(--pf-emerald-strong));
+    animation: pf-pulse-soft 1.8s ease-out infinite;
+  }
+}
