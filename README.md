@@ -105,7 +105,7 @@ Isteethaq-web/
 
 | الزر | الوجهة |
 |---|---|
-| تسجيل دخول | `${VITE_RABT_LOGIN_URL}` (مثال: https://app.rabt.sa/auth/login) |
+| تسجيل دخول | `${VITE_RABT_LOGIN_URL}` (مثال: https://rabt-law.com/auth/login) |
 | تطبيق Android | `${VITE_APP_ANDROID_URL}` |
 | تطبيق iOS | `${VITE_APP_IOS_URL}` |
 
@@ -140,8 +140,8 @@ Isteethaq-web/
    ```
    VITE_SUPABASE_URL = https://lxhwudcnbixczwiuhrkl.supabase.co
    VITE_SUPABASE_PUBLISHABLE_KEY = [paste anon key]
-   VITE_RABT_PLATFORM_URL = https://app.rabt.sa
-   VITE_RABT_LOGIN_URL = https://app.rabt.sa/auth/login
+   VITE_RABT_PLATFORM_URL = https://rabt-law.com
+   VITE_RABT_LOGIN_URL = https://rabt-law.com/auth/login
    VITE_APP_ANDROID_URL = https://play.google.com/store/apps/details?id=com.isteethaq.app
    VITE_APP_IOS_URL = https://apps.apple.com/app/isteethaq/id000000000
    VITE_ORGANIZATION_SLUG = isteethaq

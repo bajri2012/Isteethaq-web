@@ -104,7 +104,7 @@ export const WebsiteNavbar = () => {
               </Link>
             </Button>
             <a
-              href={import.meta.env.VITE_RABT_PLATFORM_URL ?? "https://app.rabt.sa"}
+              href={import.meta.env.VITE_RABT_PLATFORM_URL ?? "https://rabt-law.com"}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-flex text-[12px] font-medium text-ws-gold hover:text-ws-navy transition-colors px-3 py-2"
@@ -112,7 +112,7 @@ export const WebsiteNavbar = () => {
               منصة ربط — لإدارة المحاماة
             </a>
             <a
-              href={import.meta.env.VITE_RABT_LOGIN_URL ?? "https://app.rabt.sa/auth/login"}
+              href={import.meta.env.VITE_RABT_LOGIN_URL ?? "https://www.rabt-law.com/auth/login"}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden lg:inline-flex text-[13px] font-medium text-ws-text-muted hover:text-ws-navy transition-colors px-3 py-2"
@@ -177,7 +177,7 @@ export const WebsiteNavbar = () => {
                 transition={{ delay: navLinks.length * 0.04 }}
               >
                 <a
-                  href={import.meta.env.VITE_RABT_LOGIN_URL ?? "https://app.rabt.sa/auth/login"}
+                  href={import.meta.env.VITE_RABT_LOGIN_URL ?? "https://www.rabt-law.com/auth/login"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block px-4 py-3 rounded-xl text-sm font-medium text-ws-text-muted hover:text-ws-navy"
